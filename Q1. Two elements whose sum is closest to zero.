@@ -1,0 +1,50 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	cin>>n;
+	int a[n];
+	for(int i = 0; i < n ; i++)
+	{
+		cin>>a[i];
+	}
+	sort(a, a+n);
+	int i = 0, j = n-1;
+	pair<int, int> ans;
+	int min = INT_MAX;
+	while(i != j)
+	{
+		if(a[i] + a[j] == 0)
+		{
+			ans.first = a[i];
+			ans.second = a[j];
+			break;
+		}
+		else if(abs(a[i] + a[j]) < 0)
+		{
+			if(min > abs(a[i] + a[j]))
+			{
+				ans.first = a[i];
+				ans.second = a[j];
+				min = abs(a[i] + a[j]);
+				i++;
+			}
+		}
+		else if(abs(a[i] + a[j]) > 0)
+		{
+			if(min > abs(a[i] + a[j]))
+			{
+				ans.first = a[i];
+				ans.second = a[j];
+				min = abs(a[i] + a[j]);
+				j--;
+			}
+		}
+	} 
+	cout<<ans.first<<" and "<<ans.second;
+	return 0;
+}
